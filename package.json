@@ -1,0 +1,20 @@
+{
+  "name": "react-ts-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Chris Finch",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-loader": "^7.1.4",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "serve": "^6.5.3",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13"
+  }
+}
