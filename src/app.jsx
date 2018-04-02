@@ -1,6 +1,13 @@
 import React from 'react';
-import Button from './button.component.jsx';
-import List from './list.component.jsx';
+import Button from './button.component';
+import List from './list.component';
+
+/**
+ * Objectives:
+ *
+ * Add toggle component to list items to record 'done' status
+ * Add 'importance' value for each list item and display in order of importance
+ */
 
 export default class App extends React.Component {
 
