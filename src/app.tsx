@@ -12,8 +12,7 @@ interface IAppProps {
 
 interface IAppState {
     todoItems?: Array<any>,
-    itemTitle?: string,
-    itemImportance?: number
+    itemTitle?: string
 }
 
 export default class App extends React.Component<IAppProps, IAppState> {
@@ -23,8 +22,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
         this.state = {
             todoItems: [],
-            itemTitle: '',
-            itemImportance: 1
+            itemTitle: ''
         }
     }
 
@@ -40,8 +38,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
         this.setState(oldState => ({
             todoItems: oldState.todoItems.concat([{
                 title: this.state.itemTitle,
-                done: false,
-                importance: this.state.itemImportance
+                done: false
             }]),
             itemTitle: ''
         }));
@@ -55,13 +52,6 @@ export default class App extends React.Component<IAppProps, IAppState> {
                 return item
             })
         }))
-    }
-
-    _handleItemImportanceChange(event) {
-        const val = event.target.value;
-        this.setState(oldState => ({
-          itemImportance: val
-        }));
     }
 
     render () {
@@ -78,7 +68,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
                         className="list"
                     >
 
-                        { this.state.todoItems.sort((a, b) => a.importance - b.importance).map((item, index) => (
+                        { this.state.todoItems.map((item, index) => (
                             <li
                                 className="list__item"
                                 key={index}
@@ -107,17 +97,6 @@ export default class App extends React.Component<IAppProps, IAppState> {
                         placeholder="Enter To-do title..."
                         onChange={ this._handleInputChange.bind(this) }
                         value={this.state.itemTitle} />
-
-                    <input
-                        className="input input--range"
-                        type="range"
-                        min="1"
-                        max="10"
-                        placeholder="importance"
-                        value={this.state.itemImportance}
-                        onChange={this._handleItemImportanceChange.bind(this)} />
-
-                    <span>{ this.state.itemImportance }</span>
 
                     <button
                         className="button"
