@@ -11,9 +11,17 @@ interface IAppProps {
 }
 
 interface IAppState {
-    todoItems?: Array<any>,
+    todoItems?: Array<ITodoItems>,
     itemTitle?: string,
-    itemImportance?: number
+    itemImportance?: number,
+    itemDescription: string
+}
+
+interface ITodoItems {
+    title: string,
+    done: boolean,
+    description: string,
+    importance: number
 }
 
 export default class App extends React.Component<IAppProps, IAppState> {
@@ -24,7 +32,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
         this.state = {
             todoItems: [],
             itemTitle: '',
-            itemImportance: 1
+            itemImportance: 1,
+            itemDescription: ''
         }
     }
 
@@ -35,13 +44,21 @@ export default class App extends React.Component<IAppProps, IAppState> {
         }));
     }
 
+    _handleDescriptionInputChange(event) {
+        const val = event.target.value;
+        this.setState(oldState => ({
+            itemDescription: val
+        }));
+    }
+
     _handleFormSubmit(event) {
         event.preventDefault();
         this.setState(oldState => ({
             todoItems: oldState.todoItems.concat([{
                 title: this.state.itemTitle,
                 done: false,
-                importance: this.state.itemImportance
+                importance: this.state.itemImportance,
+                description: this.state.itemDescription
             }]),
             itemTitle: ''
         }));
@@ -88,6 +105,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
                                     type="checkbox"
                                     checked={ !!item.done }
                                     onChange={ this._handleItemDoneChange.bind(this, index) } />
+                                <div>{ item.description }</div>
                             </li>
                         )) }
 
@@ -107,6 +125,12 @@ export default class App extends React.Component<IAppProps, IAppState> {
                         placeholder="Enter To-do title..."
                         onChange={ this._handleInputChange.bind(this) }
                         value={this.state.itemTitle} />
+
+                    <input
+                        className="input"
+                        placeholder="Enter description..."
+                        onChange={ this._handleDescriptionInputChange.bind(this) }
+                        value={this.state.itemDescription} />
 
                     <input
                         className="input input--range"
